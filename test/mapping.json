@@ -19,6 +19,7 @@
       },
       "diff": {
         "shortcut": "d",
+        "default": "HEAD",
         "always": "--color",
         "options": {
           "h": "--histogram"

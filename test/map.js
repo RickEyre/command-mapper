@@ -17,4 +17,14 @@ suite("map", function() {
     expect(map.triangulate("")).to.equal("");
   });
 
+
+  test("map constructor should not accept an array", function() {
+    expect(function() { new Map([]) }).to.throw(Error);
+  });
+
+
+  test("should have two mappings", function() {
+    expect(map.mappings).to.have.length(2);
+  });
+
 });
