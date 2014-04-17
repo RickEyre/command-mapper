@@ -1,0 +1,27 @@
+{
+  "name": "map",
+  "version": "0.0.0",
+  "description": "Maps input to some output based on a mapping.son file",
+  "main": "lib/map.js",
+  "scripts": {
+    "test": "./node_modules/.bin/grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RickEyre/map.git"
+  },
+  "author": "Rick Eyre <rick.eyre@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RickEyre/map/issues"
+  },
+  "homepage": "https://github.com/RickEyre/map",
+  "devDependencies": {
+    "grunt-cli": "0.1.13",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-bump": "0.0.13",
+    "mocha": "1.18.2",
+    "grunt-mocha-test": "0.10.2",
+    "chai": "1.9.1"
+  }
+}
