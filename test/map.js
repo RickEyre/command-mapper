@@ -22,4 +22,9 @@ suite("map", function() {
     expect(function() { new Map([]) }).to.throw(Error);
   });
 
+
+  test("should have two mappings", function() {
+    expect(map.mappings).to.have.length(2);
+  });
+
 });
