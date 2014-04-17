@@ -1,0 +1,29 @@
+{
+ "ls": {
+    "shortcut": "l",
+    "default": "-ls",
+    "options": {
+      "t": "-lkh"
+    }
+  },
+  "git": {
+    "shortcut": "g",
+    "default": "help",
+    "mappings": {
+      "commit": {
+        "shortcut": "c",
+        "default": "-a",
+        "options": {
+          "m": "-am"
+        }
+      },
+      "diff": {
+        "shortcut": "d",
+        "always": "--color",
+        "options": {
+          "h": "--histogram"
+        }
+      }
+    }
+  }
+}
