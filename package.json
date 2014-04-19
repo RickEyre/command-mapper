@@ -2,7 +2,7 @@
   "name": "map",
   "version": "0.0.0",
   "description": "Maps input to some output based on a mapping.son file",
-  "main": "lib/map.js",
+  "main": "lib/command-mapper.js",
   "scripts": {
     "test": "./node_modules/.bin/grunt"
   },
