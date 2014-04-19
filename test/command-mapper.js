@@ -9,12 +9,12 @@ var expect = require("chai").expect,
 suite("CommandMapper", function() {
 
   test("should look like a CommandMapper object", function(){
-    expect(CommandMapper).to.have.property("triangulate");
-    expect(commandMap).to.have.property("triangulate");
+    expect(CommandMapper).to.have.property("map");
+    expect(commandMap).to.have.property("map");
   });
 
   test("should accept an empty string", function() {
-    expect(commandMap.triangulate("")).to.equal("");
+    expect(commandMap.map("")).to.equal("");
   });
 
 
