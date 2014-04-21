@@ -22,12 +22,23 @@ suite("CommandMapper", function() {
     expect(commandMap.mappings).to.have.length(2);
   });
 
-  test("should accept an empty string", function() {
-    expect(commandMap.map("")).to.equal("");
-  });
+  suite("#map", function() {
+    test("should accept an empty string", function() {
+      expect(commandMap.map("")).to.equal("");
+    });
 
-  test("stringing basic shortcuts together should work", function() {
-    expect(commandMap.map("g c")).to.equal("git commit");
+    test("stringing basic shortcuts together should work", function() {
+      expect(commandMap.map("g c")).to.equal("git commit -a");
+    });
+
+    test("use the default command if no shortcut has been passed", function() {
+      expect(commandMap.map("g")).to.equal("git help");
+    });
+
+    // TODO: Formula needs to be implemented for this to work correctly.
+    test.skip("the always option should be appended if it has been set", function() {
+      expect(commandMap.map("g d")).to.equal("git diff HEAD --color");
+    });
   });
 
 });
