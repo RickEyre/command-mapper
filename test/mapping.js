@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright (c) 2014 map contributors
+// Copyright (c) 2014 command-mapper contributors
 
 var expect = require("chai").expect,
     Mapping = require("../lib/mapping"),

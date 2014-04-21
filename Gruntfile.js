@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright (c) map contributors.
+// Copyright (c) command-mapper contributors.
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         tagName: "v%VERSION%",
         tagMessage: "Version %VERSION%",
         push: true,
-        pushTo: "git@github.com:RickEyre/map.git",
+        pushTo: "git@github.com:RickEyre/command-mapper.git",
       }
     },
 

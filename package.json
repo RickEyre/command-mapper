@@ -1,21 +1,21 @@
 {
-  "name": "map",
+  "name": "command-mapper",
   "version": "0.0.0",
-  "description": "Maps input to some output based on a mapping.son file",
+  "description": "Maps command aliases to commands based on a mapping.son file.",
   "main": "lib/command-mapper.js",
   "scripts": {
     "test": "./node_modules/.bin/grunt"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RickEyre/map.git"
+    "url": "https://github.com/RickEyre/command-mapper.git"
   },
   "author": "Rick Eyre <rick.eyre@hotmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RickEyre/map/issues"
+    "url": "https://github.com/RickEyre/command-mapper/issues"
   },
-  "homepage": "https://github.com/RickEyre/map",
+  "homepage": "https://github.com/RickEyre/command-mapper",
   "dependencies": {
     "minimist": "0.0.8"
   },
