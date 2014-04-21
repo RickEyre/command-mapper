@@ -7,6 +7,10 @@ var expect = require("chai").expect,
 
 suite("mapping", function() {
 
+  test("should look like a Mapping object", function(){
+    expect(new Mapping("git", { "shortcut": "g" })).to.have.property("map");
+  });
+
   test("mapping constructor should not accept an array", function() {
     expect(function(){ new Mapping("key", [])}).to.throw(Error);
   });

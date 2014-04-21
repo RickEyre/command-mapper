@@ -13,11 +13,6 @@ suite("CommandMapper", function() {
     expect(commandMap).to.have.property("map");
   });
 
-  test("should accept an empty string", function() {
-    expect(commandMap.map("")).to.equal("");
-  });
-
-
   test("CommandMapper constructor should not accept an array", function() {
     expect(function() { new CommandMapper([]) }).to.throw(Error);
   });
@@ -25,6 +20,14 @@ suite("CommandMapper", function() {
 
   test("should have two mappings", function() {
     expect(commandMap.mappings).to.have.length(2);
+  });
+
+  test("should accept an empty string", function() {
+    expect(commandMap.map("")).to.equal("");
+  });
+
+  test("stringing basic shortcuts together should work", function() {
+    expect(commandMap.map("g c")).to.equal("git commit");
   });
 
 });

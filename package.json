@@ -16,6 +16,9 @@
     "url": "https://github.com/RickEyre/map/issues"
   },
   "homepage": "https://github.com/RickEyre/map",
+  "dependencies": {
+    "minimist": "0.0.8"
+  },
   "devDependencies": {
     "grunt-cli": "0.1.13",
     "grunt-contrib-jshint": "0.10.0",
