@@ -1,6 +1,6 @@
 {
   "name": "command-mapper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Maps command aliases to real commands based on a mapping.son file.",
   "main": "lib/command-mapper.js",
   "scripts": {
