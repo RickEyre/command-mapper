@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/RickEyre/command-mapper",
   "dependencies": {
-    "minimist": "0.0.8"
+    "minimist": "0.0.8",
+    "underscore": "1.6.0"
   },
   "devDependencies": {
     "grunt-cli": "0.1.13",
