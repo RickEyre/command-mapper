@@ -8,7 +8,7 @@ var expect = require("chai").expect,
 suite("mapping", function() {
 
   test("should look like a Mapping object", function(){
-    expect(new Mapping("git", { "shortcut": "g" })).to.have.property("map");
+    expect(new Mapping("git", { "shortcut": "g" })).to.respondTo("map");
   });
 
   test("mapping constructor should not accept an array", function() {
@@ -23,9 +23,11 @@ suite("mapping", function() {
     var mapping = new Mapping("git", { "shortcut": "g" });
     expect(mapping.command).to.equal("git");
     expect(mapping.shortcut).to.equal("g");
-    expect(mapping["default"]).to.be.empty;
-    expect(mapping.always).to.be.empty;
+    expect(mapping["default"]).to.equal("");
+    expect(mapping.always).to.equal("");
     expect(mapping.options).to.be.empty;
+    expect(mapping.options).to.be.an("object");
+    expect(mapping.mappings).to.be.an("array");
     expect(mapping.mappings).to.have.length(0);
   });
 
@@ -36,7 +38,8 @@ suite("mapping", function() {
     expect(mapping["default"]).to.equal("HEAD");
     expect(mapping.always).to.equal("--color");
     expect(mapping.options).to.deep.equal({ "h": "--histogram" })
-    expect(mapping.mappings).to.be.empty;
+    expect(mapping.mappings).to.be.an("array");
+    expect(mapping.mappings).to.have.length(0);
   });
 
 });

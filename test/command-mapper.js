@@ -9,8 +9,8 @@ var expect = require("chai").expect,
 suite("CommandMapper", function() {
 
   test("should look like a CommandMapper object", function(){
-    expect(CommandMapper).to.have.property("map");
-    expect(commandMap).to.have.property("map");
+    expect(CommandMapper).to.respondTo("map");
+    expect(commandMap).to.respondTo("map");
   });
 
   test("CommandMapper constructor should not accept an array", function() {
