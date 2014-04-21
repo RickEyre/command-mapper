@@ -40,6 +40,15 @@ suite("CommandMapper", function() {
     test.skip("the always option should be appended if it has been set", function() {
       expect(commandMap.map("g d")).to.equal("git diff HEAD --color");
     });
+
+    test("options should be translated", function() {
+      expect(commandMap.map("g c -m")).to.equal("git commit -am");
+    });
+
+    test("single options with no translation should just be appended", function() {
+      expect(commandMap.map("g c -mt")).to.equal("git commit -am -t");
+    });
+
   });
 
 });
