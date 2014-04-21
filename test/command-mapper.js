@@ -19,6 +19,7 @@ suite("CommandMapper", function() {
 
 
   test("should have two mappings", function() {
+    expect(commandMap.mappings).to.be.an("array");
     expect(commandMap.mappings).to.have.length(2);
   });
 
