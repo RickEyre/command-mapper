@@ -36,8 +36,7 @@ suite("CommandMapper", function() {
       expect(commandMap.map("g")).to.equal("git help");
     });
 
-    // TODO: Formula needs to be implemented for this to work correctly.
-    test.skip("the always option should be appended if it has been set", function() {
+    test("the always option should be appended if it has been set", function() {
       expect(commandMap.map("g d")).to.equal("git diff HEAD --color");
     });
 
@@ -47,6 +46,10 @@ suite("CommandMapper", function() {
 
     test("single options with no translation should just be appended", function() {
       expect(commandMap.map("g c -mt")).to.equal("git commit -am -t");
+    });
+
+    test("non-boolean options with no translation should be appended", function() {
+      expect(commandMap.map("g c -mt --rand=8")).to.equal("git commit -am -t --rand=8");
     });
 
   });
