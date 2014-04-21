@@ -1,7 +1,7 @@
 {
   "name": "command-mapper",
   "version": "0.0.0",
-  "description": "Maps command aliases to commands based on a mapping.son file.",
+  "description": "Maps command aliases to real commands based on a mapping.son file.",
   "main": "lib/command-mapper.js",
   "scripts": {
     "test": "./node_modules/.bin/grunt"
