@@ -13,7 +13,7 @@ var expect = require("chai").expect,
 suite("CommandMapper", function() {
 
   test("should look like a CommandMapper object", function(){
-    expect(CommandMapper).to.respondTo("map");
+    expect(CommandMapper).itself.to.respondTo("map");
     expect(new CommandMapper(mapping)).to.respondTo("map");
   });
 
