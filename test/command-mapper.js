@@ -3,6 +3,8 @@
 
 var expect = require("chai").expect,
     CommandMapper = require("../lib/command-mapper"),
+    path = require("path"),
+    mappingJSONFile = path.resolve(__dirname, "./mapping.json");
     mapping = {
       git: {
         shortcut: "g",
@@ -14,6 +16,7 @@ suite("CommandMapper", function() {
 
   test("should look like a CommandMapper object", function(){
     expect(CommandMapper).itself.to.respondTo("map");
+    expect(CommandMapper).itself.to.respondTo("fromMappingJSONFile");
     expect(new CommandMapper(mapping)).to.respondTo("map");
   });
 
@@ -29,6 +32,10 @@ suite("CommandMapper", function() {
   });
 
   suite("#map", function() {
+
+    test("map should be able to load a file", function() {
+      expect(CommandMapper.map(mappingJSONFile, "g")).to.equal("git");
+    });
 
     test("should accept an empty string", function() {
       expect(CommandMapper.map(mapping, "")).to.equal("");
@@ -61,6 +68,17 @@ suite("CommandMapper", function() {
     test("non-boolean options with no translation should be appended", function() {
       expect(CommandMapper.map(mapping, "g c -mt --rand=8")).to.equal("git commit -am -t --rand=8");
     });
+
+  });
+
+  suite("#fromMappingJSONFile", function() {
+
+    test("should load command mapper object correctly", function() {
+      var commandMapper = CommandMapper.fromMappingJSONFile(mappingJSONFile);
+      expect(commandMapper).to.be.an.instanceOf(CommandMapper);
+      expect(commandMapper.mappings).to.be.an("array");
+      expect(commandMapper.mappings).to.have.length(1);
+    })
 
   });
 
