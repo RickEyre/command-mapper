@@ -12,11 +12,11 @@ suite("mapping", function() {
   });
 
   test("mapping constructor should not accept an array", function() {
-    expect(function(){ new Mapping("key", [])}).to.throw(Error);
+    expect(function(){ new Mapping("key", []); }).to.throw(Error);
   });
 
   test("mapping should at least have a shortcut property", function() {
-    expect(function(){ new Mapping("key", {})}).to.throw(Error);
+    expect(function(){ new Mapping("key", {}); }).to.throw(Error);
   });
 
   test("mapping should have correct default values", function() {
@@ -47,7 +47,7 @@ suite("mapping", function() {
     expect(mapping.shortcut).to.equal("d");
     expect(mapping["default"]).to.equal("HEAD");
     expect(mapping.always).to.equal("--color");
-    expect(mapping.options).to.deep.equal({ "h": "--histogram" })
+    expect(mapping.options).to.deep.equal({ "h": "--histogram" });
     expect(mapping.mappings).to.be.an("array");
     expect(mapping.mappings).to.have.length(0);
     expect(mapping.formula).to.not.be.empty;

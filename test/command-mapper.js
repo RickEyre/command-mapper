@@ -21,7 +21,7 @@ suite("CommandMapper", function() {
   });
 
   test("CommandMapper constructor should not accept an array", function() {
-    expect(function() { new CommandMapper([]) }).to.throw(Error);
+    expect(function() { new CommandMapper([]); }).to.throw(Error);
   });
 
 
@@ -78,7 +78,7 @@ suite("CommandMapper", function() {
       expect(commandMapper).to.be.an.instanceOf(CommandMapper);
       expect(commandMapper.mappings).to.be.an("array");
       expect(commandMapper.mappings).to.have.length(1);
-    })
+    });
 
   });
 

@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         browser: true,
         node: true
       },
-      files: [ "lib/*" ]
+      files: [ "lib/*", "test/*" ]
     },
 
     bump: {
