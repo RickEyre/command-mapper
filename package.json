@@ -27,5 +27,15 @@
     "mocha": "1.18.2",
     "grunt-mocha-test": "0.10.2",
     "chai": "1.9.1"
-  }
+  },
+  "keywords": [
+    "cli",
+    "command",
+    "mapper",
+    "map",
+    "alias",
+    "helper",
+    "translate",
+    "module"
+  ]
 }
