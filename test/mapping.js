@@ -2,7 +2,8 @@
 // Copyright (c) 2014 command-mapper contributors
 
 var expect = require("chai").expect,
-    Mapping = require("../lib/mapping.js")
+    Mapping = require("../lib/mapping.js"),
+    Formula = require("../lib/formula.js");
 
 suite("mapping", function() {
 
@@ -28,6 +29,8 @@ suite("mapping", function() {
     expect(mapping.options).to.be.an("object");
     expect(mapping.mappings).to.be.an("array");
     expect(mapping.mappings).to.have.length(0);
+    expect(mapping.formula).to.not.be.empty;
+    expect(mapping.formula).to.be.an.instanceof(Formula);
   });
 
   test("mapping should load correctly", function() {
@@ -47,6 +50,8 @@ suite("mapping", function() {
     expect(mapping.options).to.deep.equal({ "h": "--histogram" })
     expect(mapping.mappings).to.be.an("array");
     expect(mapping.mappings).to.have.length(0);
+    expect(mapping.formula).to.not.be.empty;
+    expect(mapping.formula).to.be.an.instanceof(Formula);
   });
 
 });

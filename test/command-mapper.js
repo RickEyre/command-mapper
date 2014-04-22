@@ -29,6 +29,7 @@ suite("CommandMapper", function() {
   });
 
   suite("#map", function() {
+
     test("should accept an empty string", function() {
       expect(CommandMapper.map(mapping, "")).to.equal("");
     });
