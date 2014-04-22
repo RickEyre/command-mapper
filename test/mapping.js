@@ -2,13 +2,12 @@
 // Copyright (c) 2014 command-mapper contributors
 
 var expect = require("chai").expect,
-    Mapping = require("../lib/mapping"),
-    mappingjson = require("./mapping.json");
+    Mapping = require("../lib/mapping.js")
 
 suite("mapping", function() {
 
   test("should look like a Mapping object", function(){
-    expect(new Mapping("git", { "shortcut": "g" })).to.respondTo("map");
+    expect(new Mapping("git", { shortcut: "g" })).to.respondTo("map");
   });
 
   test("mapping constructor should not accept an array", function() {
@@ -20,7 +19,7 @@ suite("mapping", function() {
   });
 
   test("mapping should have correct default values", function() {
-    var mapping = new Mapping("git", { "shortcut": "g" });
+    var mapping = new Mapping("git", { shortcut: "g" });
     expect(mapping.command).to.equal("git");
     expect(mapping.shortcut).to.equal("g");
     expect(mapping["default"]).to.equal("");
@@ -32,7 +31,15 @@ suite("mapping", function() {
   });
 
   test("mapping should load correctly", function() {
-    var mapping = new Mapping("diff", mappingjson.git.mappings.diff);
+    var opts = {
+      shortcut: "d",
+      "default": "HEAD",
+      always: "--color",
+      options: {
+        h: "--histogram"
+      },
+    };
+    var mapping = new Mapping("diff", opts);
     expect(mapping.command).to.equal("diff");
     expect(mapping.shortcut).to.equal("d");
     expect(mapping["default"]).to.equal("HEAD");

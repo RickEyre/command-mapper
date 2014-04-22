@@ -3,14 +3,18 @@
 
 var expect = require("chai").expect,
     CommandMapper = require("../lib/command-mapper"),
-    mapping = require("./mapping.json"),
-    commandMap = new CommandMapper(mapping);
+    mapping = {
+      git: {
+        shortcut: "g",
+        "default": "help"
+      }
+    };
 
 suite("CommandMapper", function() {
 
   test("should look like a CommandMapper object", function(){
     expect(CommandMapper).to.respondTo("map");
-    expect(commandMap).to.respondTo("map");
+    expect(new CommandMapper(mapping)).to.respondTo("map");
   });
 
   test("CommandMapper constructor should not accept an array", function() {
@@ -19,37 +23,42 @@ suite("CommandMapper", function() {
 
 
   test("should have two mappings", function() {
-    expect(commandMap.mappings).to.be.an("array");
-    expect(commandMap.mappings).to.have.length(2);
+    var commandMapper = new CommandMapper(mapping);
+    expect(commandMapper.mappings).to.be.an("array");
+    expect(commandMapper.mappings).to.have.length(1);
   });
 
   suite("#map", function() {
     test("should accept an empty string", function() {
-      expect(commandMap.map("")).to.equal("");
-    });
-
-    test("stringing basic shortcuts together should work", function() {
-      expect(commandMap.map("g c")).to.equal("git commit -a");
+      expect(CommandMapper.map(mapping, "")).to.equal("");
     });
 
     test("use the default command if no shortcut has been passed", function() {
-      expect(commandMap.map("g")).to.equal("git help");
+      expect(CommandMapper.map(mapping, "g")).to.equal("git help");
+    });
+
+    test("stringing basic shortcuts together should work", function() {
+      mapping.git.mappings = { diff: { shortcut: "d" } };
+      expect(CommandMapper.map(mapping, "g d")).to.equal("git diff");
     });
 
     test("the always option should be appended if it has been set", function() {
-      expect(commandMap.map("g d")).to.equal("git diff HEAD --color");
+      mapping.git.mappings.diff["default"] = "HEAD";
+      mapping.git.mappings.diff.always = "--color";
+      expect(CommandMapper.map(mapping, "g d")).to.equal("git diff HEAD --color");
     });
 
     test("options should be translated", function() {
-      expect(commandMap.map("g c -m")).to.equal("git commit -am");
+      mapping.git.mappings.commit = { shortcut: "c", options: { "m": "-am" } };
+      expect(CommandMapper.map(mapping, "g c -m")).to.equal("git commit -am");
     });
 
     test("single options with no translation should just be appended", function() {
-      expect(commandMap.map("g c -mt")).to.equal("git commit -am -t");
+      expect(CommandMapper.map(mapping, "g c -mt")).to.equal("git commit -am -t");
     });
 
     test("non-boolean options with no translation should be appended", function() {
-      expect(commandMap.map("g c -mt --rand=8")).to.equal("git commit -am -t --rand=8");
+      expect(CommandMapper.map(mapping, "g c -mt --rand=8")).to.equal("git commit -am -t --rand=8");
     });
 
   });
