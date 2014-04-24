@@ -31,25 +31,29 @@ suite("formula", function() {
     expect(formula.recipe).to.deep.equal("%command% %1% %2% %options%");
   });
 
-  test("formula should cook ingredients correctly", function() {
-    var formula = new Formula("%command% %mappings% %1% %2% %options%");
-    expect(formula.cook({
-      command: "git",
-      mappings: "push",
-      args: [ "origin", "master" ],
-      options: [ "-f", "--tags" ]
-    })).to.equal("git push origin master -f --tags");
-  });
+  suite("#cook", function() {
 
-  test("default formula should have cook ingredients correctly", function() {
-    var formula = new Formula();
-    expect(formula.cook({
-      command: "cmd",
-      "default": "woah-there",
-      args: [ "one", "two" ],
-      mapping: "this-sub-mapping",
-      options: [ "--woah=9", "-t", "-vwb" ]
-    })).to.equal("cmd woah-there one two this-sub-mapping --woah=9 -t -vwb");
+    test("formula should cook ingredients correctly", function() {
+      var formula = new Formula("%command% %mappings% %1% %2% %options%");
+      expect(formula.cook({
+        command: "git",
+        mappings: "push",
+        args: [ "origin", "master" ],
+        options: [ "-f", "--tags" ]
+      })).to.equal("git push origin master -f --tags");
+    });
+
+    test("default formula should have cook ingredients correctly", function() {
+      var formula = new Formula();
+      expect(formula.cook({
+        command: "cmd",
+        "default": "woah-there",
+        args: [ "one", "two" ],
+        mapping: "this-sub-mapping",
+        options: [ "--woah=9", "-t", "-vwb" ]
+      })).to.equal("cmd woah-there one two this-sub-mapping --woah=9 -t -vwb");
+    });
+
   });
 
 });
