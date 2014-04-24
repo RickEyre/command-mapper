@@ -7,7 +7,7 @@ var expect = require("chai").expect,
     mappingJSONFile = path.resolve(__dirname, "./mapping.json");
     mapping = {
       git: {
-        shortcut: "g",
+        alias: "g",
         "default": "help"
       }
     };
@@ -41,12 +41,12 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "")).to.equal("");
     });
 
-    test("use the default command if no shortcut has been passed", function() {
+    test("use the default command if no alias has been passed", function() {
       expect(CommandMapper.map(mapping, "g")).to.equal("git help");
     });
 
-    test("stringing basic shortcuts together should work", function() {
-      mapping.git.mappings = { diff: { shortcut: "d" } };
+    test("stringing basic aliases together should work", function() {
+      mapping.git.mappings = { diff: { alias: "d" } };
       expect(CommandMapper.map(mapping, "g d")).to.equal("git diff");
     });
 
@@ -57,7 +57,7 @@ suite("CommandMapper", function() {
     });
 
     test("options should be translated", function() {
-      mapping.git.mappings.commit = { shortcut: "c", options: { "m": "-am" } };
+      mapping.git.mappings.commit = { alias: "c", options: { "m": "-am" } };
       expect(CommandMapper.map(mapping, "g c -m")).to.equal("git commit -am");
     });
 

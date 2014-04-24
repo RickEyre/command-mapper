@@ -8,21 +8,21 @@ var expect = require("chai").expect,
 suite("mapping", function() {
 
   test("should look like a Mapping object", function(){
-    expect(new Mapping("git", { shortcut: "g" })).to.respondTo("map");
+    expect(new Mapping("git", { alias: "g" })).to.respondTo("map");
   });
 
   test("mapping constructor should not accept an array", function() {
     expect(function(){ new Mapping("key", []); }).to.throw(Error);
   });
 
-  test("mapping should at least have a shortcut property", function() {
+  test("mapping should at least have an alias property", function() {
     expect(function(){ new Mapping("key", {}); }).to.throw(Error);
   });
 
   test("mapping should have correct default values", function() {
-    var mapping = new Mapping("git", { shortcut: "g" });
+    var mapping = new Mapping("git", { alias: "g" });
     expect(mapping.command).to.equal("git");
-    expect(mapping.shortcut).to.equal("g");
+    expect(mapping.alias).to.equal("g");
     expect(mapping["default"]).to.equal("");
     expect(mapping.always).to.equal("");
     expect(mapping.options).to.be.empty;
@@ -35,7 +35,7 @@ suite("mapping", function() {
 
   test("mapping should load correctly", function() {
     var opts = {
-      shortcut: "d",
+      alias: "d",
       "default": "HEAD",
       always: "--color",
       options: {
@@ -44,7 +44,7 @@ suite("mapping", function() {
     };
     var mapping = new Mapping("diff", opts);
     expect(mapping.command).to.equal("diff");
-    expect(mapping.shortcut).to.equal("d");
+    expect(mapping.alias).to.equal("d");
     expect(mapping["default"]).to.equal("HEAD");
     expect(mapping.always).to.equal("--color");
     expect(mapping.options).to.deep.equal({ "h": "--histogram" });
