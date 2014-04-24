@@ -72,6 +72,18 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g c -mt --rand=8")).to.equal("git commit -am -t --rand=8");
     });
 
+    test("args that are not an alias should just be appended", function() {
+      expect(CommandMapper.map(mapping, "g push origin master -f")).to.equal("git push origin master -f");
+    });
+
+    test("formula should alter command output correctly", function() {
+      mapping.mappings[1].formula = "%mapping% %command% %always% %options% %args%";
+      mapping.mappings[1].always = "--always";
+      expect(CommandMapper.map(mapping, "g c -opm --rand=8 argOne")).to.equal(
+        "git commit --always -o -p -am --rand=8 argOne"
+      );
+    });
+
   });
 
   suite("#fromMappingJSONFile", function() {
