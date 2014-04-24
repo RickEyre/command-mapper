@@ -8,19 +8,23 @@ var expect = require("chai").expect,
 suite("mapping", function() {
 
   test("should look like a Mapping object", function(){
-    expect(new Mapping("git", { alias: "g" })).to.respondTo("map");
+    expect(new Mapping({ command: "git", alias: "g" })).to.respondTo("map");
   });
 
   test("mapping constructor should not accept an array", function() {
-    expect(function(){ new Mapping("key", []); }).to.throw(Error);
+    expect(function(){ new Mapping([]); }).to.throw(Error);
   });
 
   test("mapping should at least have an alias property", function() {
-    expect(function(){ new Mapping("key", {}); }).to.throw(Error);
+    expect(function(){ new Mapping({ command: "git" }); }).to.throw(Error);
+  });
+
+  test("mapping should at least have an command property", function() {
+    expect(function(){ new Mapping({ alias: "g"}); }).to.throw(Error);
   });
 
   test("mapping should have correct default values", function() {
-    var mapping = new Mapping("git", { alias: "g" });
+    var mapping = new Mapping({ command: "git", alias: "g" });
     expect(mapping.command).to.equal("git");
     expect(mapping.alias).to.equal("g");
     expect(mapping["default"]).to.equal("");
@@ -34,15 +38,15 @@ suite("mapping", function() {
   });
 
   test("mapping should load correctly", function() {
-    var opts = {
+    var mapping = new Mapping({
+      command: "diff",
       alias: "d",
       "default": "HEAD",
       always: "--color",
       options: {
         h: "--histogram"
-      },
-    };
-    var mapping = new Mapping("diff", opts);
+      }
+    });
     expect(mapping.command).to.equal("diff");
     expect(mapping.alias).to.equal("d");
     expect(mapping["default"]).to.equal("HEAD");

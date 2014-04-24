@@ -6,24 +6,23 @@ var expect = require("chai").expect,
     path = require("path"),
     mappingJSONFile = path.resolve(__dirname, "./mapping.json");
     mapping = {
-      git: {
-        alias: "g",
-        "default": "help"
-      }
+      command: "git",
+      alias: "g",
+      "default": "help"
     };
 
 suite("CommandMapper", function() {
+
+  test("CommandMapper constructor should accept array or object", function() {
+    expect(function() { new CommandMapper([ mapping ]); }).to.not.throw(Error);
+    expect(function() { new CommandMapper(mapping); }).to.not.throw(Error);
+  });
 
   test("should look like a CommandMapper object", function(){
     expect(CommandMapper).itself.to.respondTo("map");
     expect(CommandMapper).itself.to.respondTo("fromMappingJSONFile");
     expect(new CommandMapper(mapping)).to.respondTo("map");
   });
-
-  test("CommandMapper constructor should not accept an array", function() {
-    expect(function() { new CommandMapper([]); }).to.throw(Error);
-  });
-
 
   test("should have two mappings", function() {
     var commandMapper = new CommandMapper(mapping);
@@ -46,18 +45,22 @@ suite("CommandMapper", function() {
     });
 
     test("stringing basic aliases together should work", function() {
-      mapping.git.mappings = { diff: { alias: "d" } };
+      mapping.mappings = [ { command: "diff", alias: "d" } ];
       expect(CommandMapper.map(mapping, "g d")).to.equal("git diff");
     });
 
     test("the always option should be appended if it has been set", function() {
-      mapping.git.mappings.diff["default"] = "HEAD";
-      mapping.git.mappings.diff.always = "--color";
+      mapping.mappings[0]["default"] = "HEAD";
+      mapping.mappings[0].always = "--color";
       expect(CommandMapper.map(mapping, "g d")).to.equal("git diff HEAD --color");
     });
 
     test("options should be translated", function() {
-      mapping.git.mappings.commit = { alias: "c", options: { "m": "-am" } };
+      mapping.mappings.push({
+        command: "commit",
+        alias: "c",
+        options: { "m": "-am" }
+      });
       expect(CommandMapper.map(mapping, "g c -m")).to.equal("git commit -am");
     });
 

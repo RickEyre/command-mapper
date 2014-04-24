@@ -1,5 +1,4 @@
 {
-  "git": {
-    "alias": "g"
-  }
+  "command": "git",
+  "alias": "g"
 }
