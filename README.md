@@ -103,7 +103,7 @@ A mapping object can consist of the follow properties:
 
 ####command####
 
-The real command that the mapping object maps too. This is a required property.
+The real command that the mapping object maps too. This is a **required** property.
 
 ```json
 {
@@ -113,7 +113,7 @@ The real command that the mapping object maps too. This is a required property.
 
 ####alias####
 
-The alias that represents the real command. This is a required property. 
+The alias that represents the real command. This is a **required** property. 
 
 ```json
 {
