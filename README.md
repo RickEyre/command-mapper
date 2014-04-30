@@ -186,6 +186,22 @@ the special string `%argument%`.
 
 `gd -h3` or `gd -h 3` would map to `git diff --hard HEAD~3`.
 
+If you'd like to have multi-character keys for the options object like:
+
+```json
+{
+  "command": "git diff",
+  "alias": "gd",
+  "options": {
+    "hard": "--hard HEAD~%argument%"
+  }
+}
+```
+
+Then make sure to write your alias option with a `--` like so, `gd --hard=3`,
+which would output, `git diff --hard HEAD~3`.
+
+
 ####mappings####
 
 A nested mapping object which represents an alias to a sub command of the parent
