@@ -171,6 +171,21 @@ An options object which represents aliases for the command.
 
 `gd -p` will map to `git diff --color --unified=8 -k -p`.
 
+Options can have a single argument that can be plugged into the mapping with
+the special string `%argument%`.
+
+```json
+{
+  "command": "git diff",
+  "alias": "gd",
+  "options": {
+    "h": "--hard HEAD~%argument%"
+  }
+}
+```
+
+`gd -h3` or `gd -h 3` would map to `git diff --hard HEAD~3`.
+
 ####mappings####
 
 A nested mapping object which represents an alias to a sub command of the parent

@@ -84,6 +84,12 @@ suite("CommandMapper", function() {
       );
     });
 
+    test("options with arguments should be mapped correctly", function() {
+      mapping.mappings[0].options = { "h": "--hard HEAD~%argument%" };
+      expect(CommandMapper.map(mapping, "g d -h3")).to.equal("git diff --color --hard HEAD~3");
+      expect(CommandMapper.map(mapping, "g d -h hey")).to.equal("git diff --color --hard HEAD~hey");
+    });
+
   });
 
   suite("#fromMappingJSONFile", function() {
