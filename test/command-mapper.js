@@ -40,6 +40,16 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "")).to.equal("");
     });
 
+    test("should accept an array", function() {
+      expect(CommandMapper.map(mapping, [])).to.equal("");
+    });
+
+    test("should throw on not array or string", function() {
+      expect(function() { CommandMapper.map(mapping, 1); }).to.throw();
+      expect(function() { CommandMapper.map(mapping, {}); }).to.throw();
+      expect(function() { CommandMapper.map(mapping, function() {}); }).to.throw();
+    });
+
     test("use the default command if no alias has been passed", function() {
       expect(CommandMapper.map(mapping, "g")).to.equal("git help");
     });
