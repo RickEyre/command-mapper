@@ -86,6 +86,12 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g push origin master -f")).to.equal("git push origin master -f");
     });
 
+    test("passing the 'asArray' option should have map return an array", function() {
+      expect(CommandMapper.map(mapping, "g c -mt --rand=8", { asArray: true })).to.deep.equal([
+        "git", "commit", "-am", "-t", "--rand=8"
+      ]);
+    });
+
     test("formula should alter command output correctly", function() {
       mapping.mappings[1].formula = "%mapping% %command% %always% %options% %args%";
       mapping.mappings[1].always = "--always";

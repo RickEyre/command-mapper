@@ -11,9 +11,9 @@ Maps command aliases to real commands based on a `mapping` options object or JSO
 - [API](#api)
   - [CommandMapper](#commandmapper)
     - [CommandMapper(mapping)](#commandmappermapping)
-    - [CommandMapper.map(mapping, input)](#commandmappermapmapping-input)
+    - [CommandMapper.map(mapping, input, [options])](#commandmappermapmapping-input-options)
     - [CommandMapper.fromMappingJSONFile(file)](#commandmapperfrommappingjsonfilefile)
-    - [map(input)](#mapinput)
+    - [map(input, [options])](#mapinput-options)
 - [Mapping Object](#mapping-object)
   - [command](#command)
   - [alias](#alias)
@@ -69,13 +69,21 @@ options object or an array of them.
 var mapper = new CommandMapper({ command: "git", alias: "g" });
 ```
 
-####CommandMapper.map(mapping, input)####
+####CommandMapper.map(mapping, input, [options])####
 
 Maps the input to a real command based on the [mapping](#mapping-object) passed.
+If `asArray` is specified as an option then an array of command line arguments
+will be returned. By default it returns the command as a string.
 
 ```js
-console.log(CommandMapper.map({ command: "git", alias: "g" , "g"));
-// --> "git"
+console.log(CommandMapper.map({ command: "git", alias: "g", "default": "help" }, "g"));
+// --> "git help"
+```
+
+```js
+console.log(CommandMapper.map({ command: "git", alias: "g", "default": "help" }, "g",
+                              { asArray: true }));
+// --> [ "git", "help" ]
 ```
 
 ####CommandMapper.fromMappingJSONFile(file)####
@@ -86,14 +94,22 @@ Creates a new `CommandMapper` object from a [mapping][mapping-object] JSON file.
 var commandMapper = CommandMapper.fromMappingJSONFile(mappingJSONFile);
 ```
 
-####map(input)####
+####map(input, [options])####
 
 Maps the input (which is an aliased command) to the real command.
+If `asArray` is specified as an option then an array of command line arguments
+will be returned. By default it returns the command as a string.
 
 ```js
-var mapper = new CommandMapper({ command: "git", alias: "g" });
+var mapper = new CommandMapper({ command: "git", alias: "g", "default": "help" });
 console.log(mapper.map("g"));
-// --> "git"
+// --> "git help"
+```
+
+```js
+var mapper = new CommandMapper({ command: "git", alias: "g", "default": "help" });
+console.log(mapper.map("g", { asArray: true }));
+// --> [ "git", "help" ]
 ```
 
 Mapping Object
