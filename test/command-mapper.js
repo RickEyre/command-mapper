@@ -86,6 +86,10 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g push origin master -f")).to.equal("git push origin master -f");
     });
 
+    test("passing the 'asArray' option should return an empty array when there is no mapping found", function() {
+      expect(CommandMapper.map(mapping, "y", { asArray: true })).to.deep.equal([]);
+    });
+
     test("passing the 'asArray' option should have map return an array", function() {
       expect(CommandMapper.map(mapping, "g c -mt --rand=8", { asArray: true })).to.deep.equal([
         "git", "commit", "-am", "-t", "--rand=8"
