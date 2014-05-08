@@ -110,6 +110,10 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g d -h hey")).to.equal("git diff --color --hard HEAD~hey");
     });
 
+    test("default should not be added if arguments have been passed", function() {
+      expect(CommandMapper.map(mapping, "g clone")).to.equal("git clone");
+    });
+
   });
 
   suite("#fromMappingJSONFile", function() {
