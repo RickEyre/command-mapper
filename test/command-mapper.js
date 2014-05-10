@@ -114,6 +114,11 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g clone")).to.equal("git clone");
     });
 
+    test("multicharacter aliases should work", function() {
+      mapping.mappings[2] = { command: "reset", alias: "rs", "default": "--hard" };
+      expect(CommandMapper.map(mapping, "g rs")).to.equal("git reset --hard");
+    });
+
   });
 
   suite("#fromMappingJSONFile", function() {
