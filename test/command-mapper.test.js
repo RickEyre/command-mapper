@@ -119,6 +119,34 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g rs")).to.equal("git reset --hard");
     });
 
+    test("'-[arg] [value]' with values and no mapping should be added to mapping", function() {
+      mapping.mappings[3] = {
+        command: "checkout",
+        alias: "co"
+      };
+      expect(CommandMapper.map(mapping, "g co -b branch")).to.equal("git checkout -b branch");
+    });
+
+    test("'--[arg] [value]' options with values and no mapping should be added vanilla style", function() {
+      expect(CommandMapper.map(mapping, "g co --b branch")).to.equal("git checkout --b branch");
+    });
+
+    test("'--[arg]=[value]' options with values and no mapping should be added vanilla style", function() {
+      expect(CommandMapper.map(mapping, "g co --b=branch")).to.equal("git checkout --b=branch");
+    });
+
+    test("'-opm' multi-options with no mappings should be added vanilla style", function() {
+      expect(CommandMapper.map(mapping, "g co -abc")).to.equal("git checkout -a -b -c");
+    });
+
+    test("'--opm' multicharacter with no mappings should be added vanilla style", function() {
+      expect(CommandMapper.map(mapping, "g co --abc")).to.equal("git checkout --abc");
+    });
+
+    test("'-b3' single option with value and no mapping should be added vanilla style", function() {
+      expect(CommandMapper.map(mapping, "g co -b3")).to.equal("git checkout -b3");
+    });
+
   });
 
   suite("#fromMappingJSONFile", function() {

@@ -289,7 +289,12 @@ appended to the given command i.e. given:
 
 `g push origin master` will map to `git push origin master`.
 
-`g commit -am` will map to `git commit -am`.
+`g commit -am` will map to `git commit -a -m`.
 
 `g diff --unified=8` will map to `git diff --unified=8`.
 
+`g diff -U8` will map to `git diff -U8`.
+
+`g checkout -b branch` will map to `git checkout -b branch`.
+
+And so on.
