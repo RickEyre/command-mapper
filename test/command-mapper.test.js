@@ -147,6 +147,10 @@ suite("CommandMapper", function() {
       expect(CommandMapper.map(mapping, "g co -b3")).to.equal("git checkout -b3");
     });
 
+    test("'-' option with no value or arg and no mapping should be added vanilla style", function() {
+      expect(CommandMapper.map(mapping, "g co -")).to.equal("git checkout -");
+    });
+
   });
 
   suite("#fromMappingJSONFile", function() {

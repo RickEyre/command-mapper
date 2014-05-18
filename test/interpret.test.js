@@ -86,4 +86,13 @@ suite("interpret", function() {
     });
   });
 
+  test("'-' option with no arg or value should be added as a property", function() {
+    var output = interpret([ "-" ]);
+    expect(output.options["-"]).to.exist;
+    expect(output.options["-"]).to.deep.equal({
+      value: true,
+      original: "-"
+    });
+  });
+
 });
